@@ -1128,19 +1128,7 @@ class AdminController extends Controller
     // Get orders based on filters
     $orders = $q->get();
 
-    // Add additional status fields to orders
-    foreach ($orders as $order) {
-        $order->check_work_status_2 = check_work_status($order->id, 2);
-        $order->check_work_status_3 = check_work_status($order->id, 3);
-        $order->check_work_status_4 = check_work_status($order->id, 4);
-        $order->check_forward_1 = check_forward($order->id, 1);
-        $order->check_forward_2 = check_forward($order->id, 2);
-        $order->check_forward_3 = check_forward($order->id, 3);
-        $order->check_forward_4 = check_forward($order->id, 4);
-        $order->_get_order_status = get_order_status($order->id);
-        $order->_count_gram_recive = count_gram_recive($order->id);
-        $order->_get_order_priority = get_order_priority($order->priority);
-    }
+
 
     // Check order status for additional filtering logic
     if ($req->order_status && $req->order_status == 2) {
@@ -1172,6 +1160,19 @@ class AdminController extends Controller
         $customers = DB::table('customers')->orderBy('customer_name', 'ASC')->get();
     }
 
+        // Add additional status fields to orders
+        foreach ($orders as $order) {
+            $order->check_work_status_2 = check_work_status($order->id, 2);
+            $order->check_work_status_3 = check_work_status($order->id, 3);
+            $order->check_work_status_4 = check_work_status($order->id, 4);
+            $order->check_forward_1 = check_forward($order->id, 1);
+            $order->check_forward_2 = check_forward($order->id, 2);
+            $order->check_forward_3 = check_forward($order->id, 3);
+            $order->check_forward_4 = check_forward($order->id, 4);
+            $order->_get_order_status = get_order_status($order->id);
+            $order->_count_gram_recive = count_gram_recive($order->id);
+            $order->_get_order_priority = get_order_priority($order->priority);
+        }
     // Handle AJAX requests for the filtered orders
     if ($req->ajax()) {
         return response()->json([
@@ -1180,6 +1181,7 @@ class AdminController extends Controller
             'customers' => $customers
         ]);
     }
+
 
     // Return the view for regular page rendering
     return view('admin.pages.order.order_history', [

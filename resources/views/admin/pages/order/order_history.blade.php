@@ -188,10 +188,10 @@ img.pro_image {
             </select>
         </div>
         <div class="col-1">
-            <button type="button" id="filterButton" class="btn btn-sm btn-success">Filter</button>
+            <button type="button" id="filterButton" class="btn btn-sm btn-success w-100">Filter</button>
         </div>
         <div class="col-1">
-            <a href="{{url()->current()}}" class="btn btn-sm btn-success">Reset</a>
+            <a href="{{url()->current()}}" class="btn btn-sm btn-success w-100">Reset</a>
         </div>
         <div class="col-2">
             <input type="text" placeholder="Select date" id="strtDate" class="form-control datepicker" name="fdate" value="{{old('fdate')}}">
