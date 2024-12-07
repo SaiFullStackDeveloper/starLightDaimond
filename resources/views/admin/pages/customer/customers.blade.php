@@ -15,7 +15,7 @@
                             <div class="worker_list_input" >
                                 <a href="{{ route('customer_form') }}"><input type="submit" placeholder="Add Worker"
                                         value="Add Customer" style="cursor: pointer"></a>
-                                        <em class="sh_img"><img src="{{ url('public') }}/assets/images/plus.png" alt=""></em>
+                                        <em class="sh_img"><img src="{{ asset('assets/images/plus.png') }}" alt=""></em>
                                     </div>
                                      @endif
                                     
@@ -54,7 +54,7 @@
                                             <p class="user_nm ">{{ $item->customer_name  }}</p>
                                         </td>
                                         <td>
-                                            <em><img height="50px" width="50px" src="{{url('public') }}/uploads/{{ $item->customer_image }}"  alt=""></em>
+                                            <em><img height="50px" width="50px" src="{{asset('uploads/{{ $item->') }}customer_image }}"  alt=""></em>
                                         </td>
                                         <td>
                                             <p>{{ $item->phone  }}</p>
@@ -83,7 +83,7 @@
                                                                 {{$value->contact_name}}
                                                             </div>
                                                             <div class="col-md-6">
-                                                                {{$value->phone_number}}<a title="Delete" href="{{url('customers_phone_delete/'.$value->id)}}"><img class="ml-2" src="{{url('public/user.png')}}" alt=""></a>
+                                                                {{$value->phone_number}}<a title="Delete" href="{{url('customers_phone_delete/'.$value->id)}}"><img class="ml-2" src="{{ asset('user.png')}}" alt=""></a>
                                                             </div>
                                                           
                                                         </div>
@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="add_cus_ph_div">
                                                 <button  onclick="add_customer_id({{$item->id}})" type="button" class="btn btn-waning add_phone_btn" data-toggle="modal" data-target="#add_customer_phone">
-                                                    <img class="phone_add_img" src="{{url('public/phone-book.png')}}" alt=""> Add Phone
+                                                    <img class="phone_add_img" src="{{ asset('phone-book.png')}}" alt=""> Add Phone
                                                   </button>
                                             </div>
                                         </td>
@@ -102,14 +102,14 @@
                                         <td>
                                             <div class="ac_di">
                                                 <ul>
-                                                    {{-- <li><a href=""><img src="{{ url('public') }}/assets/images/action1.png" alt=""></a>
+                                                    {{-- <li><a href=""><img src="{{ asset('assets/images/action1.png') }}" alt=""></a>
                                                     </li> --}}
                                                     @if(mpc(Session::get('id'),2,'add'))
-                                                    <li><a href="{{ route('edit_customer',[$item->id]) }}"><img src="{{ url('public') }}/assets/images/action2.png" alt=""></a></li>
-                                                    <li ><a href="{{ route('delete_customer',[$item->id]) }}"><img src="{{ url('public') }}/assets/images/action3.png" alt=""></a></li>
+                                                    <li><a href="{{ route('edit_customer',[$item->id]) }}"><img src="{{ asset('assets/images/action2.png') }}" alt=""></a></li>
+                                                    <li ><a href="{{ route('delete_customer',[$item->id]) }}"><img src="{{ asset('assets/images/action3.png') }}" alt=""></a></li>
                                                     @endif
                                                     <li>
-                                                        <span style="cursor: pointer;" onclick="fetch_customer_details({{$item->id}})" data-toggle="modal" data-target="#user_details_modal" class="badge badge-light  badge-lg"><img src="{{ url('public') }}/assets/images/user-avatar.png" alt=""></span>
+                                                        <span style="cursor: pointer;" onclick="fetch_customer_details({{$item->id}})" data-toggle="modal" data-target="#user_details_modal" class="badge badge-light  badge-lg"><img src="{{ asset('assets/images/user-avatar') }}.png" alt=""></span>
 
                                                         <input type="hidden" id="customer_name_{{$item->id}}" value="{{$item->customer_name}}">
                                                         <input type="hidden" id="phone_{{$item->id}}" value="{{$item->phone}}">
@@ -121,7 +121,7 @@
                                                         <input type="hidden" id="address_{{$item->id}}" value="{{$item->address}}">
                                                         <input type="hidden" id="dob_{{$item->id}}" value="{{$item->dob}}">
                                                         <input type="hidden" id="joiningdate_{{$item->id}}" value="{{$item->joiningdate}}">
-                                                        <input type="hidden" id="worker_iamge_{{$item->id}}" value="{{url('public/uploads/'.$item->customer_image) }}">
+                                                        <input type="hidden" id="worker_iamge_{{$item->id}}" value="{{ asset('uploads/'.$item->customer_image) }}">
                                                       </li>  
                                                 </ul>
                                             </div>

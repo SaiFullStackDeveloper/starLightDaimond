@@ -243,7 +243,7 @@
                                         <div class="col-md-12">
                                             <div class="sub_btn cc_top_btn">
                                                 <button style="border:none" type="submit"  class="btn_cc">Submit
-                                                        <em><img src="{{ url('public') }}/assets/images/btn_icon.png" class="" alt=""></em></button>
+                                                        <em><img src="{{ asset('assets/images/btn_icon.png') }}" class="" alt=""></em></button>
                                             </div>
                                         </div>
 

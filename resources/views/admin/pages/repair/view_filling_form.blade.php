@@ -173,7 +173,7 @@ if ($main_data) {
                                                 @if ($main_id)
                                                     <input type="hidden" value="{{$main_id}}" name="work_id">
                                                 <button style="border:none" type="submit"  class="btn_cc">Submit
-                                                    <em><img src="{{ url('public') }}/assets/images/btn_icon.png" class="" alt=""></em></button>
+                                                    <em><img src="{{ asset('assets/images/btn_icon.png') }}" class="" alt=""></em></button>
                                                 </div>
                                                 @endif
                                         </div>

@@ -235,7 +235,7 @@
                                                 <div class="row">
                                                 @foreach($order_image as $list)
                                                 <div class="col-4 text-center">
-                                                    <img src='{{url('public/uploads',$list->name)}}' class='preview-image'>
+                                                    <img src='{{ asset('uploads',$list->name)}}' class='preview-image'>
                                                     <a href="{{url('delete_product_image',$list->id)}}" class="btn btn-danger w-100">Delete</a>
                                                 </div>
                                                 @endforeach
@@ -244,7 +244,7 @@
                                         <div class="col-md-12">
                                             <div class="sub_btn cc_top_btn">
                                                 <button style="border:none" type="submit"  class="btn_cc">Update
-                                                        <em><img src="{{ url('public') }}/assets/images/btn_icon.png" class="" alt=""></em></button>
+                                                        <em><img src="{{ asset('assets/images/btn_icon.png') }}" class="" alt=""></em></button>
                                             </div>
                                         </div>
                                             {{-- </div> --}}

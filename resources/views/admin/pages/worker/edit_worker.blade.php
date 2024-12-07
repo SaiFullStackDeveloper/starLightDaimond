@@ -117,7 +117,7 @@
                                                         class="inputfile inputfile-1"
                                                         data-multiple-caption="{count} files selected" >
                                                     <label for="file-1">Drag and Drop or <b>Browse</b> to upload
-                                                        <em><img src="{{ url('public') }}/uploads/{{ $worker->worker_iamge }}" style="width:38px;border-radius:15px;height: 100%;
+                                                        <em><img src="{{ asset('uploads/{{ $worker->worker_iamge }}') }}" style="width:38px;border-radius:15px;height: 100%;
                                                         }" alt=""></em>
                                                     </label>
                                                 </div>
@@ -131,7 +131,7 @@
                                                         class="inputfile inputfile-1"
                                                         data-multiple-caption="{count} files selected" >
                                                     <label for="file-2">Drag and Drop or <b>Browse</b> to upload
-                                                        <em><img src="{{ url('public') }}/uploads/{{ $worker->identity_doc }}" style="width:38px;border-radius:15px;height: 100%;
+                                                        <em><img src="{{ asset('uploads/{{ $worker->identity_doc }}') }}" style="width:38px;border-radius:15px;height: 100%;
                                                                 alt=""></em>
                                                     </label>
                                                 </div>

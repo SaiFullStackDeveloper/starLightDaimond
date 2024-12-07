@@ -12,14 +12,14 @@
                       <div class="worker_list_input mx-2">
                         <a href="{{ route('worker_form') }}?worker_type=Worker"><input type="submit" placeholder="Add Worker"
                                 value="Add Worker"></a>
-                        <em class="sh_img"><img src="{{ url('public') }}/assets/images/plus.png" alt=""></em>
+                        <em class="sh_img"><img src="{{ asset('assets/images/plus.png') }}" alt=""></em>
                     </div>
                     @endif
                     @if (Session::get('role') != 3 && $worker_type == 3)
                     <div class="worker_list_input mx-2">
                       <a href="{{ route('worker_form') }}?worker_type=Manager"><input type="submit" placeholder="Add Worker"
                               value="Add Management"></a>
-                      <em class="sh_img"><img src="{{ url('public') }}/assets/images/plus.png" alt=""></em>
+                      <em class="sh_img"><img src="{{ asset('assets/images/plus.png') }}" alt=""></em>
                   </div>  
                   @endif
                   @endif 
@@ -94,7 +94,7 @@
                                               <p class="user_nm " style="float: right;">
                                                 {{ $item->name  }}
                                                 <em>
-                                                  <img src="{{url('public') }}/uploads/{{ $item->worker_iamge }}" class="ml-2" alt="">
+                                                  <img src="{{asset('uploads/{{ $item->worker_iamge }}') }}" class="ml-2" alt="">
                                                 </em>
                                               </p>
                                               @if($item->role)
@@ -175,15 +175,15 @@
                 <ul>
                     @if(mpc(Session::get('id'),3,'add'))
                     @if($item->role == 3)     
-                    <li><a title='permission' href="{{ url('edit_worker/'.$item->id) }}?worker_type=Manager&permission=1"><img src="{{ url('public') }}/assets/images/userlock.png" alt=""></a></li>
-                    <li><a href="{{ url('edit_worker/'.$item->id) }}?worker_type=Manager"><img src="{{ url('public') }}/assets/images/action2.png" alt=""></a></li>
+                    <li><a title='permission' href="{{ url('edit_worker/'.$item->id) }}?worker_type=Manager&permission=1"><img src="{{ asset('assets/images/userlock.png') }}" alt=""></a></li>
+                    <li><a href="{{ url('edit_worker/'.$item->id) }}?worker_type=Manager"><img src="{{ asset('assets/images/action2.png') }}" alt=""></a></li>
                     @else
-                    <li><a href="{{ url('edit_worker/'.$item->id) }}?worker_type=Worker"><img src="{{ url('public') }}/assets/images/action2.png" alt=""></a></li>
+                    <li><a href="{{ url('edit_worker/'.$item->id) }}?worker_type=Worker"><img src="{{ asset('assets/images/action2.png') }}" alt=""></a></li>
                     @endif
-                    <li ><a href="{{ route('delete_worker',[$item->id]) }}"><img src="{{ url('public') }}/assets/images/action3.png" alt=""></a></li>
+                    <li ><a href="{{ route('delete_worker',[$item->id]) }}"><img src="{{ asset('assets/images/action3.png') }}" alt=""></a></li>
                     @endif
                     <li>
-                      <span style="cursor: pointer;" onclick="fetch_user_details({{$item->id}})" data-toggle="modal" data-target="#user_details_modal" class="badge badge-light  badge-lg"><img src="{{ url('public') }}/assets/images/user-avatar.png" alt=""></span>
+                      <span style="cursor: pointer;" onclick="fetch_user_details({{$item->id}})" data-toggle="modal" data-target="#user_details_modal" class="badge badge-light  badge-lg"><img src="{{ asset('assets/images/user-avatar.png') }}" alt=""></span>
 
                       <input type="hidden" id="name_{{$item->id}}" value="{{$item->name}}">
                       <input type="hidden" id="phone_{{$item->id}}" value="{{$item->phone}}">
@@ -193,7 +193,7 @@
                       <input type="hidden" id="email_{{$item->id}}" value="{{$item->email}}">
                       <input type="hidden" id="password_{{$item->id}}" value="{{$item->password}}">
                       <input type="hidden" id="role_{{$item->id}}" value="{{get_role_name($item->role)}}">
-                      <input type="hidden" id="worker_iamge_{{$item->id}}" value="{{url('public/uploads/'.$item->worker_iamge) }}">
+                      <input type="hidden" id="worker_iamge_{{$item->id}}" value="{{ asset('uploads/'.$item->worker_iamge) }}">
                       <input type="hidden" id="alt_number_{{$item->id}}" value="{{$item->alt_number}}">
                     </li>  
                    

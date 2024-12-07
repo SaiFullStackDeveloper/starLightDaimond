@@ -1,10 +1,10 @@
 @php
 $c_name = "";
-$c_pp =url('public/uploads/1677326235images.jpg');
+$c_pp = asset('uploads/1677326235images.jpg');
 $cus_data = get_worker($workerid);
 if ($cus_data) {
   $c_name = $cus_data->name;
-  $c_pp = url('public/uploads/'.$cus_data->worker_iamge);
+  $c_pp =  asset('uploads/'.$cus_data->worker_iamge);
 }
 @endphp
 @include('admin.main.header')

@@ -28,8 +28,8 @@
                                 <input type="hidden" value="{{$worker_id}}" name="worker_id">
                                 <input type="hidden" value="" name="is_excel" id="is_excel">
                                 <div class="col-3">
-                                    <button type="submit" class="btn"><img src="{{url('public/magnifying-glass.png')}}" height="auto" width="25px" alt=""></button>
-                                    <button type="button" onclick="dust_table_excel()" class="btn"><img src="{{url('public/excel.png')}}" height="auto" width="25px" alt=""></button>
+                                    <button type="submit" class="btn"><img src="{{ asset('magnifying-glass.png')}}" height="auto" width="25px" alt=""></button>
+                                    <button type="button" onclick="dust_table_excel()" class="btn"><img src="{{ asset('excel.png')}}" height="auto" width="25px" alt=""></button>
                                 </div>
                                 
                             </div>
@@ -61,8 +61,8 @@
                                            <td>{{$item->name}}</td>
                                            <td>{{$item->return_dust}}</td>
                                            <td>
-                                            {{-- <a href="" class="btn"><img height="auto" width="25px" src="{{url('public/edit.png')}}" alt=""></a> --}}
-                                            <a href="{{url('delete_return_dust/'.$item->id)}}" class="btn"><img height="auto" width="25px" src="{{url('public/delete.png')}}" alt=""></a>
+                                            {{-- <a href="" class="btn"><img height="auto" width="25px" src="{{ asset('edit.png')}}" alt=""></a> --}}
+                                            <a href="{{url('delete_return_dust/'.$item->id)}}" class="btn"><img height="auto" width="25px" src="{{ asset('delete.png')}}" alt=""></a>
                                            </td>
                                         </tr>
                                         @endforeach

@@ -9,15 +9,15 @@
     <meta name="author" content="">
     <meta name="_token" content="{{csrf_token()}}" />
     <title>Starlight Diamonds</title>
-    <link href="{{ url('public') }}/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ url('public') }}/assets/css/style.css" rel="stylesheet">
-    <link href="{{ url('public') }}/assets/css/responsive.css" rel="stylesheet">
-    <link href="{{ url('public') }}/assets/css/fonts.css" rel="stylesheet">
-    <link href="{{ url('public') }}/assets/css/font-awesome/all.min.css" rel="stylesheet">
-    <link href="{{ url('public') }}/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/fonts.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/font-awesome/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('select2/dist/css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
-    <link href="{{ url('public') }}/assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/jquery-ui.css') }}" rel="stylesheet">
 
     <!-- FontAwesome 6.2.0 CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -27,7 +27,7 @@
     <style>
         @font-face {
             font-family: 'Arboria-Medium';
-            src: url('public/ttf/Arboria-Medium.ttf') format('truetype');
+            src:  asset('ttf/Arboria-Medium.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
@@ -155,7 +155,7 @@ input.comment_input_css{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url('{{url('public/assets/images/logo1.png')}}');
+  background-image: url('{{ asset('assets/images/logo1.png')}}');
   background-size: contain;
   background-repeat: no-repeat;
   width: 300px;
@@ -246,7 +246,7 @@ td.incon_css span i {
     border-radius: 10px;
     text-transform: capitalize;
 }
-/* background-image: url('{{url('public/assets/images/logo1.png')}}'); */
+/* background-image: url('{{ asset('assets/images/logo1.png')}}'); */
     </style>
     <style>
         /* Add your styles for image preview here */
@@ -275,11 +275,11 @@ td.incon_css span i {
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light nav_top">
                 <a class="navbar-brand" href="@if(mpc(Session::get('id'),1,'view')){{ route('dashboard') }} @endif"><img
-                        src="{{ url('public') }}/assets/images/logo1.png" alt="logo" /></a>
+                        src="{{ asset('assets/images/logo1.png') }}" alt="logo" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <img src="{{ url('public') }}/assets/images/menu.png" alt="">
+                    <img src="{{ asset('assets/images/menu.png') }}" alt="">
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
@@ -355,7 +355,7 @@ td.incon_css span i {
 
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img
-                                src="{{ url('public') }}/assets/images/admin.png" style="height:100%;width:30px"
+                                src="{{ asset('assets/images/admin.png') }}" style="height:100%;width:30px"
                                 alt="Avatar"> @if (Session::get('role') == 1){{ 'Admin' }} @elseif(Session::get('role') == 3) {{ 'Management' }} @else {{ 'Worker' }} @endif
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu mt-3">

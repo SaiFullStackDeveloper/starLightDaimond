@@ -11,13 +11,13 @@
        		<div class="dashboard_pg_rig">
        			<ul>
        				<li><button href="#url" class="das_arw_btn das_bor_btn">
-       					<em><img src="{{ url('public') }}/assets/images/print_icon2.png" alt="" class="prin_img1">
-       					<img src="{{ url('public') }}/assets/images/print_icon.png" alt="" class="prin_img2"></em>
+       					<em><img src="{{ asset('assets/images/print_icon2.png') }}" alt="" class="prin_img1">
+       					<img src="{{ asset('assets/images/print_icon.png') }}" alt="" class="prin_img2"></em>
        					 Print</button></li>
        				<li><button class="das_arw_btn">
        					<em>
-       						<img src="{{ url('public') }}/assets/images/export_icon.png" alt="" class="prin_img1">
-       						<img src="{{ url('public') }}/assets/images/export_icon1.png" alt="" class="prin_img2">
+       						<img src="{{ asset('assets/images/export_icon.png') }}" alt="" class="prin_img1">
+       						<img src="{{ asset('assets/images/export_icon1.png') }}" alt="" class="prin_img2">
        					</em>
        				Export</button></li>
        			</ul>
@@ -50,7 +50,7 @@
        			<div class="col-md-6">
        					<div class="grap_chart_bx">
        						<h3>By Grams</h3>
-       						<b class="all_drp"><a href="#url">All <img src="{{ url('public') }}/assets/images/drop1.png" alt=""></a></b>
+       						<b class="all_drp"><a href="#url">All <img src="{{ asset('assets/images/drop1.png') }}" alt=""></a></b>
        						<div class="grams_dv">
        							<canvas id="myChart" height="400" width="600"></canvas>
        						</div>
@@ -59,7 +59,7 @@
        			<div class="col-md-6">
        					<div class="grap_chart_bx">
        						<h3>Grams by Date</h3>
-       						<b class="all_drp"><a href="#url">All <img src="{{ url('public') }}/assets/images/drop1.png" alt=""></a></b>
+       						<b class="all_drp"><a href="#url">All <img src="{{ asset('assets/images/drop1.png') }}" alt=""></a></b>
        						<div class="grams_dv">
        					<canvas id="myChart2" height="400" width="600"></canvas>
        					</div>

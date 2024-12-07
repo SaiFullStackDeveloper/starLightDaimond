@@ -102,7 +102,7 @@ if ($main_data) {
                                         </div>
                                         @if(login_role() == 3 || login_role() == 1)
                                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 mt-5">
-                                            <span class="filling_btn cr_poin" onclick="forward_order(1,{{$order->is_multiple}},{{$order->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span>
+                                            <span class="filling_btn cr_poin" onclick="forward_order(1,{{$order->is_multiple}},{{$order->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span>
                                             @if (check_forward($order->id,2))
                                             @endif
                                             @if(check_forward($order->id,1))
@@ -229,8 +229,8 @@ if ($main_data) {
                                                 <div class='row preview-container' id="preview-container">
                                                     @foreach($order_image as $list)
                                                     <div class='col-md-2'>
-                                                        <a href="{{url('public/uploads',$list->name)}}" target="_blank">
-                                                        <img height="100" width="100" class="product-image-preview" src='{{url('public/uploads',$list->name)}}' class='product-image'></a>
+                                                        <a href="{{ asset('uploads',$list->name)}}" target="_blank">
+                                                        <img height="100" width="100" class="product-image-preview" src='{{ asset('uploads',$list->name)}}' class='product-image'></a>
                                                     </div>
                                                     @endforeach
                                                 </div>
@@ -311,7 +311,7 @@ if ($main_data) {
                                                 
                                                     <input type="hidden" value="{{$main_id}}" name="work_id">
                                                 <button style="border:none" type="submit"  class="btn_cc">Submit
-                                                    <em><img src="{{ url('public') }}/assets/images/btn_icon.png" class="" alt=""></em></button>
+                                                    <em><img src="{{ asset('assets/images/btn_icon.png') }}" class="" alt=""></em></button>
                                                 </div>
                                                 @endif
                                         </div>

@@ -10,7 +10,7 @@
                     <div class="worker_list_input" >
                         <a href="{{ route('customer_form') }}"><input type="submit" placeholder="Add Worker"
                                 value="Add Customer" style="cursor: pointer"></a>
-                        <em class="sh_img"><img src="{{ url('public') }}/assets/images/plus.png" alt=""></em>
+                        <em class="sh_img"><img src="{{ asset('assets/images/plus.png" alt=""></em>
                     </div>
                 </div>
             </div>
@@ -39,20 +39,20 @@
                             <span class="hide_big">Actions</span>
                             <div class="ac_di">
                                 <ul>
-                                    <li><a href="{{ route('view_filling_form',[$item->id]) }}"><img src="{{ url('public') }}/assets/images/action1.png" alt=""></a>
+                                    <li><a href="{{ route('view_filling_form',[$item->id]) }}"><img src="{{ asset('assets/images/action1.png" alt=""></a>
                                     {{-- </li>
-                                    <li><a href="{{ route('edit_customer',[$item->id]) }}"><img src="{{ url('public') }}/assets/images/action2.png" alt=""></a></li>
-                                    <li ><a href="{{ route('delete_customer',[$item->id]) }}"><img src="{{ url('public') }}/assets/images/action3.png" alt=""></a></li> --}}
+                                    <li><a href="{{ route('edit_customer',[$item->id]) }}"><img src="{{ asset('assets/images/action2.png" alt=""></a></li>
+                                    <li ><a href="{{ route('delete_customer',[$item->id]) }}"><img src="{{ asset('assets/images/action3.png" alt=""></a></li> --}}
                                 </ul>
                             </div>
                         </div>
                         {{-- <div class="col">
-                            <p class="user_nm ">{{ get_client_name($item->client_name)  }}<em><img src="{{url('public') }}/uploads/{{ $item->image }}"  alt=""></em></p>
+                            <p class="user_nm ">{{ get_client_name($item->client_name)  }}<em><img src="{{asset('uploads/{{ $item->image }}"  alt=""></em></p>
                             <span class="">Actions</span>
                         </div> --}}
 
                          <div class="col">
-                            <p class="user_nm">{{ get_client_name( $item->client_name)  }}<em><img src="{{url('public') }}/uploads/{{ $item->image }}"  alt=""></em></p>
+                            <p class="user_nm">{{ get_client_name( $item->client_name)  }}<em><img src="{{asset('uploads/{{ $item->image }}"  alt=""></em></p>
                         </div>
                        {{-- <div class="col">
                             <p>{{ $item->item  }}</p>

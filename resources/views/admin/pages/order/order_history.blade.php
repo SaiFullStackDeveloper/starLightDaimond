@@ -238,7 +238,7 @@ img.pro_image {
                                       <td class="incon_css">
                                           
                                             <span class="filling_btn cr_poin" onclick="forward_order(1,{{$item->is_multiple}},{{$item->id}})">
-                                              <img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt="">
+                                              <img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt="">
                                             </span>
                                           <!-- @if (check_forward($item->id,2)) -->
                                           <!-- @endif -->
@@ -251,7 +251,7 @@ img.pro_image {
                                       </td>
                                       <td  class="incon_css">
                                         @if(check_work_status($item->id,2) == 1)
-                                        <span class="filling_btn cr_poin" onclick="forward_order(2,{{$item->is_multiple}},{{$item->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span>
+                                        <span class="filling_btn cr_poin" onclick="forward_order(2,{{$item->is_multiple}},{{$item->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span>
                                           <!-- @if (check_forward($item->id,3)) -->
                                           <!-- @endif -->
                                          @if(check_forward($item->id,2))
@@ -263,7 +263,7 @@ img.pro_image {
                                     </td>
                                       <td  class="incon_css">
                                         @if(check_work_status($item->id,3) == 1)
-                                        <span class="filling_btn cr_poin" onclick="forward_order(3,{{$item->is_multiple}},{{$item->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span>
+                                        <span class="filling_btn cr_poin" onclick="forward_order(3,{{$item->is_multiple}},{{$item->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span>
                                             <!-- @if (check_forward($item->id,4)) -->
                                             <!-- @endif -->
                                         @if(check_forward($item->id,3))
@@ -276,7 +276,7 @@ img.pro_image {
                                     </td>
                                       <td  class="incon_css">
                                         @if(check_work_status($item->id,4) == 1)
-                                        <span class="filling_btn cr_poin" onclick="forward_order(4,{{$item->is_multiple}},{{$item->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span>
+                                        <span class="filling_btn cr_poin" onclick="forward_order(4,{{$item->is_multiple}},{{$item->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span>
                                         @if(check_forward($item->id,4))
                                           <div><span class="text-danger">Pending</span></div>
                                          @else

@@ -142,7 +142,7 @@
                     <a style="float: right;" class="btn btn-success mr-2" href="{{url('customer_orders_excel/'.$cus_id)}}">Import To Excel</a>
                     <span class="top_con_inline">
                         @if ($cus_img)
-                        <img class="cos_imag" src="{{url('public') }}/uploads/{{ $cus_img }}" alt="">
+                        <img class="cos_imag" src="{{asset('uploads/{{ $cus_img }}') }}" alt="">
                         @else
                         <img class="cos_imag" src="http://localhost/jewellery/public/uploads/1677326235images.jpg" alt="">
                         @endif

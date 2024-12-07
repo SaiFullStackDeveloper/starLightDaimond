@@ -161,7 +161,7 @@
                                         <div class=" cc_top_btn">
                                             <button style="border:none;margin-top:123px;height:53px;text-align:center;"
                                                 type="submit" class="btn_cc mx-5">Submit
-                                                <em><img src="{{ url('public') }}/assets/images/btn_icon.png" alt=""
+                                                <em><img src="{{ asset('assets/images/btn_icon.png') }}" alt=""
                                                     class="mt-2"></em></button>
                                         </div>
                                     </div>

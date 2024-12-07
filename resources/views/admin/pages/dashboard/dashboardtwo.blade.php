@@ -69,7 +69,7 @@
                         </div>
                         
                         <div class="col-md-1">
-                            <button type="submit" class="btn btn_no_css filter_btn_css">Filter: <img class="filter_gif" src="{{url('public/filter.png')}}" alt=""></button>
+                            <button type="submit" class="btn btn_no_css filter_btn_css">Filter: <img class="filter_gif" src="{{ asset('filter.png')}}" alt=""></button>
                         </div>
                         <div class="col-md-1">
                             <a style="border:1px solid #c2c2c2;" href="{{url('dashboard')}}" class="btn btn_no_css filter_btn_css">Reset</a>
@@ -165,7 +165,8 @@
                                 <h3 class="title_individual total_worker_val">{{$total_worker}}</h3>
                             </div>
                         </div>
-                        <img class="total_worker_bg" src="{{url('public/dash/Worker.svg')}}" alt="">
+                        <img class="total_worker_bg" src="{{ asset('dash/Worker.svg') }}" alt="">
+                        <img class="total_worker_bg" src="{{ asset('dash/Worker.svg')}}" alt="">
                     </div>
                     <div class="total_worker">
                         <div class="row">
@@ -176,7 +177,7 @@
                                 <h3 class="title_individual total_worker_val total_gram_color">{{$total_gram_pending}}</h3>
                             </div>
                         </div>
-                        <img class="total_worker_bg" src="{{url('public/dash/Grams.svg')}}" alt="">
+                        <img class="total_worker_bg" src="{{ asset('dash/Grams.svg')}}" alt="">
                     </div>
                 </div>
 
@@ -225,7 +226,7 @@
                                                 <h3 class="title_individual total_worker_val total_order_red_color">{{$total_order}}</h3>
                                             </div>
                                         </div>
-                                        <img class="total_worker_bg" src="{{url('public/dash/download (42) 1.svg')}}" alt="">
+                                        <img class="total_worker_bg" src="{{ asset('dash/download (42) 1.svg')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -238,7 +239,7 @@
                                                 <h3 class="title_individual total_worker_val ">{{$total_order_product}}</h3>
                                             </div>
                                         </div>
-                                        <img class="total_worker_bg" src="{{url('public/dash/download (43) 1.svg')}}" alt="">
+                                        <img class="total_worker_bg" src="{{ asset('dash/download (43) 1.svg')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -251,7 +252,7 @@
                                                 <h3 class="title_individual total_worker_val total_customer_color">{{$customet_total}}</h3>
                                             </div>
                                         </div>
-                                        <img class="total_worker_bg" src="{{url('public/Layer 2.png')}}" alt="">
+                                        <img class="total_worker_bg" src="{{ asset('Layer 2.png')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -264,7 +265,7 @@
                                                 <h3 class="title_individual total_worker_val total_gram_color">{{$total_gram_approx}}</h3>
                                             </div>
                                         </div>
-                                        <img class="total_worker_bg" src="{{url('public/dash/download (45) 1.svg')}}" alt="">
+                                        <img class="total_worker_bg" src="{{ asset('dash/download (45) 1.svg')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -277,7 +278,7 @@
                                                 <h3 class="title_individual total_worker_val total_gram_color">{{$total_gram_pending}}</h3>
                                             </div>
                                         </div>
-                                        <img class="total_worker_bg" src="{{url('public/dash/download (45) 1.svg')}}" alt="">
+                                        <img class="total_worker_bg" src="{{ asset('dash/download (45) 1.svg')}}" alt="">
                                     </div>
                                 </div>
                             </div>

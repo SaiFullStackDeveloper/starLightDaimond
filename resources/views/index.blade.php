@@ -136,7 +136,7 @@ button {
 <form action="{{route('login')}}" method="post">
  @csrf
   <div class="screen-1">
-    <img  src='{{url('public/assets/images/logo1.png')}}' class="login_page_logo">
+    <img  src='{{ asset('assets/images/logo1.png')}}' class="login_page_logo">
       <div class="email">
         <label for="email">Email Address</label>
         <div class="sec-2">

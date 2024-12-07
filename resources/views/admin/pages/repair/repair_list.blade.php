@@ -148,7 +148,7 @@ img.pro_image {
                                       <td>{{ $item->date  }}</td>
                                       <td class="incon_css">
                                         @if (check_repair_forward($item->id,3))
-                                            <span class="filling_btn cr_poin" onclick="forward_repair(1,{{$item->is_multiple}},{{$item->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span> <span class="br-right"></span> 
+                                            <span class="filling_btn cr_poin" onclick="forward_repair(1,{{$item->is_multiple}},{{$item->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span> <span class="br-right"></span> 
                                          @endif
                                          @if(check_repair_forward($item->id,1))
                                          <div><span class="text-danger">Pending</span></div>
@@ -160,7 +160,7 @@ img.pro_image {
                                       <td  class="incon_css">
                                         @if(check_repair_status($item->id,3))
                                           @if (check_repair_forward($item->id,4))
-                                              <span class="filling_btn cr_poin" onclick="forward_repair(3,{{$item->is_multiple}},{{$item->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span> 
+                                              <span class="filling_btn cr_poin" onclick="forward_repair(3,{{$item->is_multiple}},{{$item->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span> 
                                             @endif
                                           @if(check_repair_forward($item->id,3))
                                           <div><span class="text-danger">Pending</span></div>
@@ -172,7 +172,7 @@ img.pro_image {
                                     </td>
                                       <td  class="incon_css">
                                         @if(check_repair_status($item->id,4))
-                                              <span class="filling_btn cr_poin" onclick="forward_repair(4,{{$item->is_multiple}},{{$item->id}})"><img src="{{url('public/img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span> 
+                                              <span class="filling_btn cr_poin" onclick="forward_repair(4,{{$item->is_multiple}},{{$item->id}})"><img src="{{ asset('img/diamond.png')}}" class="forbtn_di" alt=""></span><span class="br-right"></span> 
                                           
                                           @if(check_repair_forward($item->id,4))
                                           <div><span class="text-danger">Pending</span></div>

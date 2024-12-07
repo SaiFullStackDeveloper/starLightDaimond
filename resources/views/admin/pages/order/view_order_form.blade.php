@@ -194,7 +194,7 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="preview-container" id="preview-container">
                                                 @foreach($order_image as $list)
-                                                    <img src='{{url('public/uploads',$list->name)}}' class='preview-image'>
+                                                    <img src='{{ asset('uploads',$list->name)}}' class='preview-image'>
                                                 @endforeach
                                             </div>
                                         </div>

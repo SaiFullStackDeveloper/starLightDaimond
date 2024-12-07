@@ -1,15 +1,18 @@
 
 <!-- Bootstrap core JavaScript -->
-<script src="{{ url('public') }}/assets/js/jquerymin.js"></script>
-<script src="{{ url('public') }}/assets/js/bootstrap.js"></script>
-<script src="{{ url('public') }}/assets/js/jquery-ui.min.js"></script>
-<script src="{{ url('public') }}/assets/js/custom.js"></script>
-<script src="{{ url('public') }}/assets/js/datepicker.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" /> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+<script src="{{ asset('assets/js/jquerymin.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+<script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('assets/js/datepicker.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{{ url('public') }}/select2/dist/js/select2.min.js"></script>
+<script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!-- <script src="https://npmcdn.com/chart.js@latest/dist/chart.min.js"></script> -->
-{{-- <script src="https://canvasjs.com/{{ url('public') }}/assets/script/canvasjs.min.js"></script> --}}
+{{-- <script src="https://canvasjs.com/{{ asset('assets/script/canvasjs.min.js') }}"></script> --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 @if(Route::currentRouteNamed('dashboard'))
