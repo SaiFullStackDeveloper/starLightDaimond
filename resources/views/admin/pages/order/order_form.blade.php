@@ -72,7 +72,7 @@
                                                 <input type="text" disabled placeholder="" name="ofnumber" value="{{get_slno_orderform()}}">
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                        <!-- <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                                             <div class="input_bx">
                                                 <span>Karat</span>
                                                 <select name="main_karat" required>
@@ -81,7 +81,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                                             <div class="input_bx">
                                                 <span>Order Date</span>
@@ -260,4 +260,48 @@
 </div>
 </div>
 @include('admin.main.footer')
+
+<!-- Load jQuery first -->
+
+<script>
+$(document).ready(function() {
+    console.log('on ready');
+    
+    // Initialize Select2
+    $('select').select2();
+    $('select[name="priority"] option').each(function() {
+        console.log('ID:', $(this).val(), 'Name:', $(this).text());
+    });
+    // Bind change event to deliverydate input field
+    $('input[name="deliverydate"]').on('change', function() {
+        console.log('Date changed');
+        var selectedDate = new Date($(this).val());
+        var currentDate = new Date();
+        var difference = (selectedDate - currentDate) / (1000 * 3600 * 24); // Difference in days
+
+        console.log('Selected Date:', selectedDate);
+        console.log('Current Date:', currentDate);
+        console.log('Difference (days):', difference);
+        
+        var priority = '';
+        if (difference < 5) {
+            priority = '1';
+        } else if (difference >= 5 && difference <= 10) {
+            priority = '2';
+        } else {
+            priority = '3';
+        }
+
+        console.log('Selected Priority:', priority);
+
+        // Now, update the priority dropdown based on the calculated priority
+        // Find the <select> for priority and set the value accordingly
+        $('select[name="priority"]').val(priority).trigger('change');  // Trigger change to update Select2
+        $('select[name="delivery_priority"]').val(priority).trigger('change');  // Trigger change to update Select2
+
+    });
+});
+
+
+</script>
 
