@@ -152,7 +152,7 @@
                                                 <input type="text" placeholder="Client Order no" class="numbers" maxlength="10" name="client_order_no[]" required>
                                             </div>
                                         </div>
-                                        <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 p-1">
+                                        <div class="col-xl-2 col-lg-1 col-md-2 col-sm-12 p-1">
                                             <div class="input_bx">
                                                 <span>Size/Inches</span>
                                                 <input type="text" placeholder="Size" name="size[]">
@@ -214,7 +214,7 @@
 
 
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="h" >
                                                 <div class="input_bx">
                                                     <span>Approx Weight Grams</span>
                                                     <input type="text" required placeholder="Enter here" value="" id="total_order_apx_val" name="appx_weight" required>
