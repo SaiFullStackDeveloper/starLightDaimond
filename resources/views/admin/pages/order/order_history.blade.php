@@ -144,69 +144,69 @@ img.pro_image {
                 <div class="card-header">
                     <h2 class="card-title">Order history</h2>
                     <a href="{{url('orders')}}" class="btn btn-sm btn-success mx-2" style="float: right;">All Orders History</a>
-                    <form action="{{url()->current()}}">
-                      <div class="row mt-2">
-                        <div class="col-2">
-                          <select name="customer_id" id="dashboard_customer_s2" class="form-control" onchange="">
-                            <option value="">Select Customer</option>
-                                @foreach ($customer as $item)
-                                    <option value="{{$item->id}}">{{$item->nickname}}</option>
-                                @endforeach
-                            </select> 
-                        </div>
-                        <div class="col-2">
-                            <select name="date_range" id="date_range" class="form-control">
-                                <option disabled selected value>Select Date Range</option>
-                                <option value="month">This month</option>
-                                <option value="last_month">Last month</option>
-                                <option value="quarterly">Quarterly</option>
-                                <option value="half_yearly">Half-yearly</option>
-                                <option value="yearly">Yearly</option>
-                                <option value="custom">Custom</option>
-                            </select> 
-                        </div>
-                          <div class="col-2">
-                            @php
-                                $pyority = get_priority_list();
-                            @endphp
-                            <select name="pyority" class="form-control" id="">
-                              <option value="">Select Priority</option>
-                              @foreach ($pyority as $p)
-                                  <option value="{{$p->id}}">{{$p->name}}</option>
-                              @endforeach
-                            </select>
-                        </div>
-                        <div class="col-2">
-                          @php
-                              $order_status = DB::table('order_status')->get();
-                          @endphp
-                          <select name="order_status" class="form-control" id="">
-                            <option value="">Select Status</option>
-                            @foreach ($order_status as $p)
-                                <option value="{{$p->type}}">{{$p->name}}</option>
-                            @endforeach
-                          </select>
-                      </div>
-                          <div class="col-1">
-                              <button type="submit" class="btn btn-sm btn-success">Filter</button>
-                          </div>
-                          <div class="col-1">
-                              <a href="{{url()->current()}}" class="btn btn-sm btn-success">Reset</a>
-                          </div>
-                          <div class="col-2">
-                              <input type="text" placeholder="Select date" id="strtDate" class="form-control datepicker" name="fdate" value="{{old('fdate')}}">
-                          </div>
-                          <div class="col-2">
-                              <input type="text" placeholder="Select date" id="endDate" class="form-control datepicker" name="tdate" value="{{old('tdate')}}">
-                          </div>
-                      </div>
-                  </form>
+                    <form id="filterForm">
+    <div class="row mt-2">
+        <div class="col-2">
+            <select name="customer_id" id="dashboard_customer_s2" class="form-control">
+                <option value="">Select Customer</option>
+                @foreach ($customer as $item)
+                    <option value="{{$item->id}}">{{$item->nickname}}</option>
+                @endforeach
+            </select> 
+        </div>
+        <div class="col-2">
+            <select name="date_range" id="date_range" class="form-control">
+                <option disabled selected value>Select Date Range</option>
+                <option value="month">This month</option>
+                <option value="last_month">Last month</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="half_yearly">Half-yearly</option>
+                <option value="yearly">Yearly</option>
+                <option value="custom">Custom</option>
+            </select> 
+        </div>
+        <div class="col-2">
+            @php
+                $pyority = get_priority_list();
+            @endphp
+            <select name="pyority" class="form-control">
+                <option value="">Select Priority</option>
+                @foreach ($pyority as $p)
+                    <option value="{{$p->id}}">{{$p->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-2">
+            @php
+                $order_status = DB::table('order_status')->get();
+            @endphp
+            <select name="order_status" class="form-control">
+                <option value="">Select Status</option>
+                @foreach ($order_status as $p)
+                    <option value="{{$p->type}}">{{$p->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-1">
+            <button type="button" id="filterButton" class="btn btn-sm btn-success">Filter</button>
+        </div>
+        <div class="col-1">
+            <a href="{{url()->current()}}" class="btn btn-sm btn-success">Reset</a>
+        </div>
+        <div class="col-2">
+            <input type="text" placeholder="Select date" id="strtDate" class="form-control datepicker" name="fdate" value="{{old('fdate')}}">
+        </div>
+        <div class="col-2">
+            <input type="text" placeholder="Select date" id="endDate" class="form-control datepicker" name="tdate" value="{{old('tdate')}}">
+        </div>
+    </div>
+</form>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 table_con">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered text-center">
+                                <table class="table table-striped table-bordered text-center" id="ordersTable">
                                   <thead>
                                     <tr class="tab_head">
                                       <th>Unique Id</th>
@@ -290,13 +290,45 @@ img.pro_image {
                                               echo get_order_priority($item->priority);
                                           @endphp
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                       {{$item->delivery_date}} <br>
                                       @if($item->delivery_mindate > $item->order_mindate)
                                         <span class="text-danger">Days Left =  <span class="text-bold">{{$item->delivery_mindate-date('Ymd')}}</span> </span>
                                       @endif
-                                    </td>
-                                      <td>{{$item->appx_gram}}</td>
+                                    </td> -->
+                                    <!-- start -->
+              
+
+                                    <td>
+    {{$item->delivery_date}} <br>
+    @if($item->delivery_mindate > $item->order_mindate)
+        @php
+            // Convert delivery_mindate (YYYYMMDD) to Carbon instance
+            $deliveryDate = \Carbon\Carbon::createFromFormat('Ymd', $item->delivery_mindate);
+            $currentDate = \Carbon\Carbon::today(); // Get today's date
+
+            // Calculate the difference in days
+            $daysDifference = $currentDate->diffInDays($deliveryDate, false); // 'false' allows negative result
+
+            // Check if delivery date is in the future or past
+            if ($daysDifference > 0) {
+                $daysLeftOrPassed = "Days Left = " . $daysDifference;
+            } elseif ($daysDifference < 0) {
+                $daysLeftOrPassed = "Days Passed = " . abs($daysDifference);
+            } else {
+                $daysLeftOrPassed = "Today is the delivery date!";
+            }
+        @endphp
+        <span class="text-danger">{{ $daysLeftOrPassed }}</span>
+    @endif
+</td>
+
+
+
+
+
+                                    <!-- end -->
+                                    <td>{{ is_numeric($item->appx_gram) ? $item->appx_gram : 0 }}</td>
                                     <td>{{count_gram_recive($item->id)}}</td>
                                     <td>
                                         <a href='{{ url('view_order_form', [$item->id]) }}' class='btn btn-success table-action-btn'><i class="fas fa-eye vieweyeicon"></i></a>
@@ -368,5 +400,155 @@ img.pro_image {
       </div>
     </div>
   </div>
-
 @include('admin.main.footer');
+
+<script>
+$(document).ready(function () {
+
+//  function get_order_status(orderId) {
+//     // You can make an AJAX request to get the status of the order based on the ID
+//     // or return a placeholder value if the status is predefined
+//     return "Status for order " + orderId; // Replace this with actual logic
+// }
+
+// JavaScript function to calculate Days Left or Days Passed
+function calculateDaysLeftOrPassed(deliveryMindate) {
+    const currentDate = new Date();
+    const deliveryDate = new Date(deliveryMindate.substring(0, 4), deliveryMindate.substring(4, 6) - 1, deliveryMindate.substring(6, 8)); // Convert to Date object
+    
+    const diffTime = deliveryDate - currentDate; // Difference in milliseconds
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+    
+    if (diffDays > 0) {
+        return `Days Left = ${diffDays}`;
+    } else if (diffDays < 0) {
+        return `Days Passed = ${Math.abs(diffDays)}`;
+    } else {
+        return "Days Left = 0";
+    }
+}
+
+
+
+    $('#filterButton').on('click', function () {
+        const formData = $('#filterForm').serialize(); // Get all form data
+
+        $.ajax({
+            url: "{{ url()->current() }}", // Send request to the same URL
+            method: "GET",
+            data: formData,
+            beforeSend: function () {
+                $('#orders_section').html('<p>Loading...</p>'); // Optional loading message
+            },
+            success: function (response) {
+            console.log('Orders fetched:', response); // Log the response for debugging
+
+            const orders = response.orders; // Assuming 'orders' is the key for the orders array
+            const tableBody = $('#ordersTable tbody'); // Target the table body
+
+            tableBody.empty(); // Clear any existing rows before appending new data
+
+            // Iterate over the orders and create new rows dynamically
+            orders.forEach(function(item) {
+                const row = `
+                    <tr>
+                        <td>
+                            <p>Client Name: ${item.client_name}</p>
+                            ${item.unique_id} 
+                            <span><a href="{{ url('order_item_details/${item.id}') }}"><i class="fas fa-eye"></i></a></span>
+                        </td>
+                        <td>${item.created_at}</td>
+
+                        <!-- Forward Status 1 -->
+                        <td class="incon_css">
+                            <span class="filling_btn cr_poin" onclick="forward_order(1, ${item.is_multiple}, ${item.id})">
+                                <img src="{{ asset('img/diamond.png') }}" class="forbtn_di" alt="">
+                            </span>
+                            ${item.check_forward_1 ? 
+                                '<div><span class="text-danger">Pending</span></div>' : 
+                                `<span class="br-right"></span><span><a href="{{ url('filling_form/${item.id}') }}"><i class="fas fa-eye vieweyeicon"></i></a></span>`}
+                        </td>
+
+                        <!-- Forward Status 2 -->
+                        <td class="incon_css">
+                            ${item.check_work_status_2 === 1 ? `
+                                <span class="filling_btn cr_poin" onclick="forward_order(2, ${item.is_multiple}, ${item.id})">
+                                    <img src="{{ asset('img/diamond.png') }}" class="forbtn_di" alt="">
+                                </span>
+                                <span class="br-right"></span>
+                                ${item.check_forward_2 ? 
+                                    '<div><span class="text-danger">Pending</span></div>' : 
+                                    `<span><a href="{{ url('Mounting_Form/${item.id}') }}"><i class="fas fa-eye vieweyeicon"></i></a></span>`}
+                            ` : ''}
+                        </td>
+
+                        <!-- Forward Status 3 -->
+                        <td class="incon_css">
+                            ${item.check_work_status_3 === 1 ? `
+                                <span class="filling_btn cr_poin" onclick="forward_order(3, ${item.is_multiple}, ${item.id})">
+                                    <img src="{{ asset('img/diamond.png') }}" class="forbtn_di" alt="">
+                                </span>
+                                <span class="br-right"></span>
+                                ${item.check_forward_3 ? 
+                                    '<div><span class="text-danger">Pending</span></div>' : 
+                                    `<span><a href="{{ url('Setting_Form/${item.id}') }}"><i class="fas fa-eye vieweyeicon"></i></a></span>`}
+                            ` : ''}
+                        </td>
+
+                        <!-- Forward Status 4 -->
+                        <td class="incon_css">
+                            ${item.check_work_status_4 === 1 ? `
+                                <span class="filling_btn cr_poin" onclick="forward_order(4, ${item.is_multiple}, ${item.id})">
+                                    <img src="{{ asset('img/diamond.png') }}" class="forbtn_di" alt="">
+                                </span>
+                                <span class="br-right"></span>
+                                ${item.check_forward_4 ? 
+                                    '<div><span class="text-danger">Pending</span></div>' : 
+                                    `<span><a href="{{ url('final_Form/${item.id}') }}"><i class="fas fa-eye vieweyeicon"></i></a></span>`}
+                            ` : ''}
+                        </td>
+
+                        <!-- Order Priority and Delivery Date -->
+                        <td>${item._get_order_priority}</td>
+
+                    
+           
+
+                        <td>${item.delivery_date} <br>
+                        <span class="text-danger">${calculateDaysLeftOrPassed(item.delivery_mindate)}</span>
+                    </td>
+
+
+                        <!-- Appx Gram and Finished Gram Count -->
+                        <td>${isNaN(item.appx_gram) ? 0 : item.appx_gram} 
+                        <td>${item._count_gram_recive}</td>
+
+                        <!-- Action Buttons -->
+                        <td>
+                            <a href='{{ url('view_order_form', ['${item.id}']) }}' class='btn btn-success table-action-btn'>
+                                <i class="fas fa-eye vieweyeicon"></i>
+                            </a>
+                            <a onclick="return confirm('Are you sure you want to edit this order?')" href='{{ url('edit_order_form', ['${item.id}']) }}' class='btn btn-dark table-action-btn'>
+                                <i class="fa-solid fa-pen-to-square vieweyeicon"></i>
+                            </a>
+                            <a onclick="return confirm('Are you sure you want to delete this order?')" href='{{ url('delete_order_form', ['${item.id}']) }}' class='btn btn-danger table-action-btn'>
+                                <i class="fa-solid fa-trash vieweyeicon"></i>
+                            </a>
+                            <div class="mt-1">
+                                ${item._get_order_status}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                tableBody.append(row); // Append the new row to the table
+            });
+        },
+            error: function (error) {
+                console.error("Error fetching data:", error);
+            }
+        });
+    });
+});
+
+
+</script>

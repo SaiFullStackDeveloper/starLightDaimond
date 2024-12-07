@@ -55,6 +55,7 @@ Route::get('worker_order_excel',[AdminController::class,'worker_order_excel'])->
 Route::get('order_form',[AdminController::class,'order_form'])->name('order_form');
 Route::post('store_order',[AdminController::class,'store_order'])->name('store_order');
 Route::get('order_history',[AdminController::class,'order_history'])->name('order_history');
+// Route::get('/order-history', [AdminController::class, 'order_history'])->name('order_history');
 Route::get('order_preview',[AdminController::class,'order_preview'])->name('order_preview');
 Route::get('orders',[AdminController::class,'orders']);
 Route::get('order_item_details/{id}',[AdminController::class,'order_item_details']);

@@ -989,92 +989,232 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Order Successfull');
 
     }
-    public function order_history(Request $req)
+   
+    // To order history code!
+    public function order_historys(Request $req)
     {
         $q = DB::table('orders')->where('is_order', 0)->orderBy('id', 'DESC');
+        
         if (login_role() == 3) {
-            $q = $q->where('manager_id', login_id());
+            $q->where('manager_id', login_id());
         }
         if ($req->customer_id) {
-            $q = $q->where('client_name', $req->customer_id);
+            $q->where('client_name', $req->customer_id);
         }
         if ($req->order_status) {
-            $reqStatus = $req->order_status;
-            if($reqStatus ==3){
-                $reqStatus = 2;
-            }
-            $q = $q->where('status', $reqStatus);
-            $data['orderStatus'] = $req->order_status;
+            $reqStatus = $req->order_status == 3 ? 2 : $req->order_status;
+            $q->where('status', $reqStatus);
         } else {
-            $q = $q->where('status', 2);
-            $data['orderStatus'] = 0;
+            $q->where('status', 2);
         }
-       
-        if($req->has('date_range')){
-            if($req->date_range == 'month'){
-                $q = $q->where('created_at', '>=', Carbon::now()->startOfMonth());
-            }else if($req->date_range == 'last_month'){
-
+        if ($req->date_range) {
+            if ($req->date_range == 'month') {
+                $q->where('created_at', '>=', Carbon::now()->startOfMonth());
+            } elseif ($req->date_range == 'last_month') {
                 $startDate = Carbon::now()->startOfMonth()->subMonth()->toDateString();
                 $endDate = Carbon::now()->endOfMonth()->subMonth()->toDateString();
-                $q = $q->whereBetween('created_at',[$startDate,$endDate]);
-
-            }else if($req->date_range == 'quarterly'){
-
-                $q = $q->where('created_at', '>=', Carbon::now()->firstOfQuarter());
-
-            }else if($req->date_range == 'half_yearly'){
-
-                $q = $q->where('created_at', '>=', Carbon::now()->subMonths(6));
-
-            }else if($req->date_range == 'yearly'){
-
-                $q = $q->where('created_at', '>=', Carbon::now()->subMonths(12));
+                $q->whereBetween('created_at', [$startDate, $endDate]);
+            } elseif ($req->date_range == 'quarterly') {
+                $q->where('created_at', '>=', Carbon::now()->firstOfQuarter());
+            } elseif ($req->date_range == 'half_yearly') {
+                $q->where('created_at', '>=', Carbon::now()->subMonths(6));
+            } elseif ($req->date_range == 'yearly') {
+                $q->where('created_at', '>=', Carbon::now()->subMonths(12));
             }
         }
         if ($req->fdate && $req->tdate) {
-
-            $fdate = date('Y-m-d H:i:s',strtotime($req->fdate));
-            $tdate = date('Y-m-d H:i:s',strtotime($req->tdate));
-            $q = $q->whereBetween(DB::raw('DATE(created_at)'), [$fdate,$tdate]);
+            $fdate = date('Y-m-d H:i:s', strtotime($req->fdate));
+            $tdate = date('Y-m-d H:i:s', strtotime($req->tdate));
+            $q->whereBetween(DB::raw('DATE(created_at)'), [$fdate, $tdate]);
         }
         if ($req->pyority) {
-            $q = $q->where('priority', $req->pyority);
+            $q->where('priority', $req->pyority);
         }
-        $q = $q->get();
-        
-        if($req->order_status && $req->order_status == 2){
-            
-           foreach ($q as $d) {
-               $qf_check = DB::table('order_forward')->where('order_id',$d->id)->count();
-               if($qf_check == 0){
-                   $qid[] = $d->id;
-                 }
-           } 
-            $q = DB::table('orders')->where('is_order', 0)->orderBy('id', 'DESC')->whereIn('id', $qid)->get();
-        }
-        if($req->order_status && $req->order_status == 3){
-            
-            foreach ($q as $d) {
-                $qf_check = DB::table('order_forward')->where('order_id',$d->id)->count();
-                if($qf_check > 0){
-                    $qid[] = $d->id;
-                  }
-            } 
-             $q = DB::table('orders')->where('is_order', 0)->orderBy('id', 'DESC')->whereIn('id', $qid)->get();
-         }
     
-        $data['order'] = $q;
-        if (login_role() == 3) {
-            $data['worker'] = DB::table('worker')->where('manager_id', login_id())->where('role', 2)->orderBy('name', 'ASC')->get();
-            $data['customer'] = DB::table('customers')->where('manager_id', login_id())->orderBy('customer_name', 'ASC')->get();
-        } else {
-            $data['worker'] = DB::table('worker')->where('role', 2)->orderBy('name', 'ASC')->get();
-            $data['customer'] = DB::table('customers')->orderBy('customer_name', 'ASC')->get();
+        $orders = $q->get();
+    
+        // Check order status for additional filtering logic
+        if ($req->order_status && $req->order_status == 2) {
+            $qid = [];
+            foreach ($orders as $d) {
+                $qf_check = DB::table('order_forward')->where('order_id', $d->id)->count();
+                if ($qf_check == 0) {
+                    $qid[] = $d->id;
+                }
+            }
+            $orders = DB::table('orders')->where('is_order', 0)->whereIn('id', $qid)->orderBy('id', 'DESC')->get();
+        } elseif ($req->order_status && $req->order_status == 3) {
+            $qid = [];
+            foreach ($orders as $d) {
+                $qf_check = DB::table('order_forward')->where('order_id', $d->id)->count();
+                if ($qf_check > 0) {
+                    $qid[] = $d->id;
+                }
+            }
+            $orders = DB::table('orders')->where('is_order', 0)->whereIn('id', $qid)->orderBy('id', 'DESC')->get();
         }
-       
-        return view('admin.pages.order.order_history', $data);
+    
+        // Prepare worker and customer data
+        if (login_role() == 3) {
+            $workers = DB::table('worker')->where('manager_id', login_id())->where('role', 2)->orderBy('name', 'ASC')->get();
+            $customers = DB::table('customers')->where('manager_id', login_id())->orderBy('customer_name', 'ASC')->get();
+        } else {
+            $workers = DB::table('worker')->where('role', 2)->orderBy('name', 'ASC')->get();
+            $customers = DB::table('customers')->orderBy('customer_name', 'ASC')->get();
+        }
+    
+        // Handle AJAX requests
+        if ($req->ajax()) {
+            return response()->json([
+                'orders' => $orders,
+                'workers' => $workers,
+                'customers' => $customers
+            ]);
+        }
+    
+        // Handle regular page rendering
+        return view('admin.pages.order.order_history', [
+            'order' => $orders,
+            'worker' => $workers,
+            'customer' => $customers,
+            
+        ]);
     }
+
+
+
+
+    public function order_history(Request $req)
+{
+    $q = DB::table('orders')->where('is_order', 0)->orderBy('id', 'DESC');
+    
+    // Apply filters based on role and request parameters
+    if (login_role() == 3) {
+        $q->where('manager_id', login_id());
+    }
+    if ($req->customer_id) {
+        $q->where('client_name', $req->customer_id);
+    }
+    if ($req->order_status) {
+        $reqStatus = $req->order_status == 3 ? 2 : $req->order_status;
+        $q->where('status', $reqStatus);
+    } else {
+        $q->where('status', 2);
+    }
+    if ($req->date_range) {
+        if ($req->date_range == 'month') {
+            $q->where('created_at', '>=', Carbon::now()->startOfMonth());
+        } elseif ($req->date_range == 'last_month') {
+            $startDate = Carbon::now()->startOfMonth()->subMonth()->toDateString();
+            $endDate = Carbon::now()->endOfMonth()->subMonth()->toDateString();
+            $q->whereBetween('created_at', [$startDate, $endDate]);
+        } elseif ($req->date_range == 'quarterly') {
+            $q->where('created_at', '>=', Carbon::now()->firstOfQuarter());
+        } elseif ($req->date_range == 'half_yearly') {
+            $q->where('created_at', '>=', Carbon::now()->subMonths(6));
+        } elseif ($req->date_range == 'yearly') {
+            $q->where('created_at', '>=', Carbon::now()->subMonths(12));
+        }
+    }
+    if ($req->fdate && $req->tdate) {
+        $fdate = date('Y-m-d H:i:s', strtotime($req->fdate));
+        $tdate = date('Y-m-d H:i:s', strtotime($req->tdate));
+        $q->whereBetween(DB::raw('DATE(created_at)'), [$fdate, $tdate]);
+    }
+    if ($req->pyority) {
+        $q->where('priority', $req->pyority);
+    }
+
+    // Get orders based on filters
+    $orders = $q->get();
+
+    // Add additional status fields to orders
+    foreach ($orders as $order) {
+        $order->check_work_status_2 = check_work_status($order->id, 2);
+        $order->check_work_status_3 = check_work_status($order->id, 3);
+        $order->check_work_status_4 = check_work_status($order->id, 4);
+        $order->check_forward_1 = check_forward($order->id, 1);
+        $order->check_forward_2 = check_forward($order->id, 2);
+        $order->check_forward_3 = check_forward($order->id, 3);
+        $order->check_forward_4 = check_forward($order->id, 4);
+        $order->_get_order_status = get_order_status($order->id);
+        $order->_count_gram_recive = count_gram_recive($order->id);
+        $order->_get_order_priority = get_order_priority($order->priority);
+    }
+
+    // Check order status for additional filtering logic
+    if ($req->order_status && $req->order_status == 2) {
+        $qid = [];
+        foreach ($orders as $d) {
+            $qf_check = DB::table('order_forward')->where('order_id', $d->id)->count();
+            if ($qf_check == 0) {
+                $qid[] = $d->id;
+            }
+        }
+        $orders = DB::table('orders')->where('is_order', 0)->whereIn('id', $qid)->orderBy('id', 'DESC')->get();
+    } elseif ($req->order_status && $req->order_status == 3) {
+        $qid = [];
+        foreach ($orders as $d) {
+            $qf_check = DB::table('order_forward')->where('order_id', $d->id)->count();
+            if ($qf_check > 0) {
+                $qid[] = $d->id;
+            }
+        }
+        $orders = DB::table('orders')->where('is_order', 0)->whereIn('id', $qid)->orderBy('id', 'DESC')->get();
+    }
+
+    // Prepare worker and customer data
+    if (login_role() == 3) {
+        $workers = DB::table('worker')->where('manager_id', login_id())->where('role', 2)->orderBy('name', 'ASC')->get();
+        $customers = DB::table('customers')->where('manager_id', login_id())->orderBy('customer_name', 'ASC')->get();
+    } else {
+        $workers = DB::table('worker')->where('role', 2)->orderBy('name', 'ASC')->get();
+        $customers = DB::table('customers')->orderBy('customer_name', 'ASC')->get();
+    }
+
+    // Handle AJAX requests for the filtered orders
+    if ($req->ajax()) {
+        return response()->json([
+            'orders' => $orders,
+            'workers' => $workers,
+            'customers' => $customers
+        ]);
+    }
+
+    // Return the view for regular page rendering
+    return view('admin.pages.order.order_history', [
+        'order' => $orders,
+        'worker' => $workers,
+        'customer' => $customers,
+    ]);
+}
+
+
+    
+    // to fetch orders
+
+    public function fetchOrders(Request $request)
+{
+    $orders = Order::query(); // Replace `Order` with your model or query logic
+
+    if ($request->has('customer_id')) {
+        $orders->where('customer_id', $request->customer_id);
+    }
+
+    if ($request->has('date_range')) {
+        // Add logic to handle date range filters
+    }
+
+    // Additional filters here...
+
+    $orders = $orders->get();
+
+    return response()->json(['orders' => $orders]);
+}
+
+
+    
+
     public function orders(Request $req)
     {
         $q = DB::table('orders')->where('status', 1)->where('is_order', 0)->orderBy('id', 'DESC');
