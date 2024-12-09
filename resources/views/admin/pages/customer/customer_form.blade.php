@@ -31,7 +31,7 @@
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                             <div class="input_bx">
                                                 <span>Nickname</span>
-                                                <input type="text" placeholder="Nickname" name="nickname" required>
+                                                <input type="text" placeholder="Nickname" name="nickname">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                                             <div class="input_bx">
-                                                <span>Joining Date</span>
+                                                <span>Start Date</span>
                                                 <input type="text" placeholder="Joining date" class="datepicker"
                                                     name="joiningdate" required>
                                             </div>
