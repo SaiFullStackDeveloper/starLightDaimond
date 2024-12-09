@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: laravel-app
+    env: linux
+    plan: free
+    buildCommand: |
+      apt-get update && apt-get install -y php-cli php-mbstring php-xml php-curl unzip composer
+      composer install --no-dev
+    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_ENV
+        value: production
