@@ -535,9 +535,15 @@ class AdminController extends Controller
         }
         $items = $items->get();
         $groupedByName = $items->groupBy('product_name');
+        // $pieceCounts = $groupedByName->map(function ($items) {
+        //     return $items->sum('piece');
+        // });
         $pieceCounts = $groupedByName->map(function ($items) {
-            return $items->sum('piece');
+            return $items->sum(function ($item) {
+                return is_numeric($item->piece) ? (int)$item->piece : 0; // Access as object property
+            });
         });
+        
         $productNames = $pieceCounts->keys()->all();
         $pieceCountsArray = $pieceCounts->values()->all();
 
